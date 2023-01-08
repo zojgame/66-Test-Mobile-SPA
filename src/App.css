@@ -84,3 +84,25 @@
   justify-content: space-around;
    display: flex
 }
+
+.loading-component{
+  border: 1px solid black;
+  text-align: center;
+  display: grid;
+  justify-content: middle;
+  padding: 40vh calc(50% - 40px);  
+  /* animation: rolling 0.5s infinite ; */
+}
+
+.loading-icon{
+  animation: rolling 1s infinite ;
+}
+
+@keyframes rolling {
+  from{
+    transform: rotate(0deg);
+  }
+  to{
+    transform: rotate(360deg);
+  }
+}

@@ -1,16 +1,12 @@
 
 import axios from 'axios';
-import { store, setNews } from '../store/store';
 
-const NEWS_API_URL = 'https://frontappapi.dock7.66bit.ru/api/news/get?page=1&count=10'
 
-export async function getNews() {
-    
+
+export async function getNews(page) {    
     try{
-        axios.get(NEWS_API_URL)
-            .then((res) => {
-                store.dispatch(setNews(res.data))
-            })
+        const NEWS_API_URL = `https://frontappapi.dock7.66bit.ru/api/news/get?page=${page}&count=10`;
+        return axios.get(NEWS_API_URL);
 
     }catch(e){
         console.error(e)

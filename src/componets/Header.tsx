@@ -20,7 +20,7 @@ export function Header({title} : HeaderProps):JSX.Element{
 
     return(
     <>
-        <Slide in={!trigger} >
+        <Slide in={!trigger}>
             <AppBar sx={{background: theme.mainColor}}>
                 <Container fixed>
                     <Toolbar className='header-toolbar'>
