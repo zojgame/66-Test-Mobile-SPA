@@ -31,7 +31,8 @@ function ThemesComponent():JSX.Element{
                     <div className="theme-btn theme3" onClick={() => setThemeColor('dark')}>Тема 3</div>
                 </div>
                 <div></div>
-            </div>            
+            </div>
+            
         </>
     )
 }

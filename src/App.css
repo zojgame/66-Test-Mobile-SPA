@@ -1,0 +1,86 @@
+.news-component{
+  margin-top: 10vh;
+  text-align: center;
+}
+
+.news-block{
+  display: block;
+  margin: 0.5vh 4vw;
+  padding: 10px;
+}
+
+.news-content-block{
+  text-align: justify;
+  max-width: 800px;
+  margin: 0 auto; 
+}
+
+.navbar-btn:hover{
+  cursor: pointer;
+}
+.navbar-btn{
+  width: 30%;
+}
+
+.theme-btn{
+  border: 1px solid black;
+  border-radius: 5px;
+  min-width: 250px;
+  margin-top: 5vh; 
+  padding: 5% 0;
+}
+
+.theme-btn:hover{
+  cursor: pointer
+}
+
+.theme1{
+  border: 3px solid rgb(255, 255, 255);
+  background-color: rgb(206, 240, 227);
+  color: rgb(10, 10, 10);
+}
+
+.theme2{
+  border: 3px solid rgb(41, 67, 153) ;
+  background-color: rgb(34, 22, 105);
+  color: rgb(201, 201, 201);
+}
+.theme3{
+  border: 3px solid rgb(111, 103, 120);
+  background-color: rgb(25, 25, 25);
+  color: rgb(209, 187, 46);
+}
+
+.themes-buttons{
+  text-align: center;
+   margin-top: 30vh
+}
+.themes-buttons-container{
+  display: grid;
+   grid-template-columns: 1fr 1fr 1fr
+}
+
+.header-toolbar{
+  display: flex;
+   justify-content: center;
+}
+
+.navbar{
+  margin-top: calc(10% + 60px);
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    height: 10%;
+    text-align: center;
+}
+
+.navbar-container{
+  height: 100%;
+  display: grid;
+  grid-template-rows: calc(1fr - 20px) 1fr calc(1fr - 20px)
+}
+
+.navbar-btn-container{
+  justify-content: space-around;
+   display: flex
+}
