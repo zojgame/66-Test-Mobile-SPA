@@ -1,29 +1,32 @@
 import { getNews } from "../api/newsApi";
-import {  RootState, store } from "../store/store";
-import { newsType } from "../store/types";
+import {  RootState, store, setNews } from "../store/store";
+import { newsType, ThemeType } from "../store/types";
 import { Header } from "./Header";
-import { ThemeType } from '../store/types';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setNews } from "../store/store";
-import {useState} from 'react';
 import LoadingComponent from "./Loading";
 import ReactPullToRefresh from 'react-pull-to-refresh';
+import { nanoid } from "nanoid";
+
 function NewsComponent():JSX.Element
 {
     const [fetching, setFetching] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
+    const dispatch = useDispatch();
+    const [isLoading, setLoading] = useState(false);
+
+    //первичное занесение данных новостей
     useEffect(() => {
             setLoading(true);
             const news = getNews(currentPage);
             news.then((res) => {
-                dispatch(setNews(res?.data))
-                setCurrentPage(currentPage + 1)                
+                dispatch(setNews(res?.data))               
             })
             .finally(() => {
                 setLoading(false);
             })       
 
+        //привзяска слушателя событий на скролл страницы
         document.addEventListener('scroll', scrollHandler)
         return function (){
             document.removeEventListener('scroll', scrollHandler)
@@ -33,17 +36,13 @@ function NewsComponent():JSX.Element
     
     useEffect(() => {
         const news = store.getState().newsReducer.news;
-        if(fetching){
-            // setLoading(true);
-            
+        if(fetching){            
             const newsForOnePage = getNews(currentPage);
             newsForOnePage.then((res) => {
                 dispatch(setNews([...news, ...res?.data]))
-                setCurrentPage(currentPage + 1)
-                
+                setCurrentPage(currentPage + 1)                
             })
             .finally(() => {
-                // setLoading(false);
                 setFetching(false);
             }) 
         }              
@@ -56,18 +55,13 @@ function NewsComponent():JSX.Element
         const distanceFromTop = window.innerHeight; 
         
         //условие срабатывает, когда пользователь приближается к нижней части страницы
-        if(pageHeightWithScroll - (visibilityPage + distanceFromTop) < 100){
-            console.log('scroll');
-            setFetching(true);
-        }
-    }
+        if(pageHeightWithScroll - (visibilityPage + distanceFromTop) < 100)
+            setFetching(true);        
+    }    
 
-    const dispatch = useDispatch();
-    const [isLoading, setLoading] = useState(false)
-    //получение новостей по запросу с сервера и занесение их в store
-    
-
-    const handleRefresh = async () => {
+    //получение новостей по запросу с сервера и занесение их в store, 
+    // после достижения конца страницы
+        const handleRefresh = async () => {
         setLoading(true);
         setCurrentPage(1)
         const news =  getNews(currentPage);
@@ -89,7 +83,7 @@ function NewsComponent():JSX.Element
                 {
                     tidings.map((n : newsType) => {
                         return (
-                            <div className='news-block' key={n.id} style={{ backgroundColor: theme.secondColor,}}>
+                            <div className='news-block' key={nanoid()} style={{ backgroundColor: theme.secondColor,}}>
                                 <b style={{color: theme.mainColor}}>{n.title}</b>
                                 <p className='news-content-block' style={{color: theme.textColor}}>{n.content}</p>            
                             </div>)
@@ -99,17 +93,13 @@ function NewsComponent():JSX.Element
             </>) 
     };
 
-    const ResultComponent = () => {
-        return(!isLoading ? <NewsComponent/> 
-        : <LoadingComponent/>) 
-    };
-
     return (
     <>
         <Header title={'Новости'}/>
-    <ReactPullToRefresh onRefresh={handleRefresh}>
-        <ResultComponent/>  
-    </ReactPullToRefresh>
+        <ReactPullToRefresh onRefresh={handleRefresh}>
+            {!isLoading ? <NewsComponent/> 
+                : <LoadingComponent/> } 
+        </ReactPullToRefresh>
     </>)
 }
 

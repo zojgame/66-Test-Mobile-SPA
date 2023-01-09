@@ -1,6 +1,5 @@
 import { AppBar, Toolbar} from '@mui/material';
 import { Container } from '@mui/system';
-import React from 'react';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import Slide from '@mui/material/Slide';
 import {useSelector} from 'react-redux';
