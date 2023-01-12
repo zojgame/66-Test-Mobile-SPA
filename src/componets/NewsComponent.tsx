@@ -14,14 +14,6 @@ function NewsComponent():JSX.Element
     const [currentPage, setCurrentPage] = useState(1);
     const dispatch = useDispatch();
     const [isLoading, setLoading] = useState(false);
-    
-    const prevTheme = localStorage.getItem('theme');
-
-    // if(prevTheme  !== null){
-    //     if(prevTheme === 'dark')
-        
-    //     dispatch(localStorage.getItem('theme'));
-    // }
 
 
     //первичное занесение данных новостей
