@@ -11,7 +11,7 @@ function Navbar():JSX.Element{
     const navigate = useNavigate();
     const [currentPage, setCurrentPage] = useState('/')
     const theme : ThemeType = useSelector((state : RootState) => state.themeReducer.currentTheme);
-
+    
     const moveTo = (url: string) => {
         navigate(url);
         setCurrentPage(url);

@@ -18,6 +18,8 @@ function ThemesComponent():JSX.Element{
         else if(color === 'blue'){
             theme = blueTheme;
         }
+        
+        localStorage.setItem('theme', color);
         dispatch(setTheme(theme));
     }
     return (
