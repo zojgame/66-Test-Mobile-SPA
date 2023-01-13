@@ -9,9 +9,12 @@ import {useState} from 'react';
 
 function Navbar():JSX.Element{
     const navigate = useNavigate();
-    const [currentPage, setCurrentPage] = useState('/')
+    const [currentPage, setCurrentPage] = useState('/');
+
+    //получение текущей цветовой темы
     const theme : ThemeType = useSelector((state : RootState) => state.themeReducer.currentTheme);
     
+    //метод срабатывает при смене страниц
     const moveTo = (url: string) => {
         navigate(url);
         setCurrentPage(url);

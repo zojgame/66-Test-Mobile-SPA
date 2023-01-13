@@ -9,6 +9,7 @@ function ThemesComponent():JSX.Element{
     const lightTheme : ThemeType= useSelector((state : RootState) => state.themeReducer.lightTheme);
     const blueTheme : ThemeType= useSelector((state : RootState) => state.themeReducer.blueTheme);
 
+    //метод срабатывает, когда нажата кнопка сметы темы
     const setThemeColor = (color: string) => {
         let theme = lightTheme;
 
@@ -19,6 +20,7 @@ function ThemesComponent():JSX.Element{
             theme = blueTheme;
         }
         
+        //сохранение текущей цветовой темы в локальное хранилище
         localStorage.setItem('theme', color);
         dispatch(setTheme(theme));
     }

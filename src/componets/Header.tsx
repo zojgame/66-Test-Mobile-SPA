@@ -11,6 +11,7 @@ type HeaderProps = {
 }
 
 export function Header({title} : HeaderProps):JSX.Element{
+    //получение текущей цветовой темы
     const theme : ThemeType = useSelector((state : RootState) =>  state.themeReducer.currentTheme)
 
     const trigger = useScrollTrigger({

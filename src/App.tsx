@@ -1,12 +1,9 @@
 import './App.css';
-import NewsComponent from './componets/NewsComponent';
-import {BrowserRouter, Routes, Route} from "react-router-dom";
-import Navbar from './componets/Navbar';
-import ThemesComponent from './componets/Themes';
 import { getThemes } from './api/getTheme';
 import { useDispatch, useSelector } from 'react-redux';
 import { setTheme, RootState } from './store/store';
 import { ThemeType } from './store/types';
+import RouterComponent from './routes/RouterComponent';
 
 function App() {
   getThemes();
@@ -15,6 +12,7 @@ function App() {
     const blueTheme : ThemeType= useSelector((state : RootState) => state.themeReducer.blueTheme);
     const prevTheme = localStorage.getItem('theme');
 
+    //проверка на то: сохранена ли предыдущая тема в локальном хранилище
     if(prevTheme !== null){
       if(prevTheme === 'dark'){
         dispatch(setTheme(darkTheme));
@@ -25,14 +23,7 @@ function App() {
     }
 
   return (
-    <BrowserRouter>
-    <Routes>
-      <Route path='/' element={<Navbar/>}>
-        <Route path='/' element={<NewsComponent/>}/>
-        <Route path='themes' element={<ThemesComponent/>}/>
-      </Route>
-    </Routes>    
-    </BrowserRouter>
+    <RouterComponent/>
   );
 }
 
